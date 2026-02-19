@@ -1,0 +1,102 @@
+"use client";
+
+import React from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowUpRight, Clock, Newspaper } from "lucide-react";
+
+interface NewsCardProps {
+    slug: string;
+    title: string;
+    excerpt: string;
+    category: string;
+    date: string;
+    readTime: string;
+    image: string;
+    source?: string;
+    index: number;
+}
+
+export default function NewsCard({
+    slug,
+    title,
+    excerpt,
+    category,
+    date,
+    readTime,
+    image,
+    source,
+    index,
+}: NewsCardProps) {
+    const formattedDate = new Date(date).toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+    });
+
+    return (
+        <motion.article
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+        >
+            <Link href={`/resources/news/${slug}`} className="group block">
+                <div className="relative overflow-hidden rounded-3xl bg-white dark:bg-white/5 border border-black/5 dark:border-white/5 hover:border-[#F4C906]/40 transition-all duration-500 shadow-sm hover:shadow-xl hover:shadow-[#F4C906]/5">
+                    {/* Image */}
+                    <div className="relative aspect-[16/10] overflow-hidden">
+                        <Image
+                            src={image}
+                            alt={title}
+                            fill
+                            className="object-cover group-hover:scale-105 transition-transform duration-700"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                        {/* Category Badge */}
+                        <div className="absolute top-4 left-4">
+                            <span className="px-4 py-1.5 rounded-full bg-[#F4C906] text-black text-xs font-black uppercase tracking-wider shadow-md">
+                                {category}
+                            </span>
+                        </div>
+
+                        {/* Arrow */}
+                        <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1">
+                            <ArrowUpRight size={18} className="text-white" />
+                        </div>
+                    </div>
+
+                    {/* Content */}
+                    <div className="p-6 space-y-4">
+                        <h3 className="text-xl font-black leading-tight tracking-tight group-hover:text-[#F4C906] transition-colors duration-300 line-clamp-2">
+                            {title}
+                        </h3>
+
+                        <p className="text-sm text-black/50 dark:text-white/50 leading-relaxed line-clamp-2">
+                            {excerpt}
+                        </p>
+
+                        {/* Meta */}
+                        <div className="flex items-center justify-between pt-2 border-t border-black/5 dark:border-white/5">
+                            <div className="flex items-center gap-3">
+                                {source && (
+                                    <div className="flex items-center gap-1.5">
+                                        <Newspaper size={12} className="text-[#F4C906]" />
+                                        <span className="text-xs font-bold text-black/60 dark:text-white/60">{source}</span>
+                                    </div>
+                                )}
+                                <span className="text-[10px] text-black/40 dark:text-white/40 font-medium">{formattedDate}</span>
+                            </div>
+
+                            <div className="flex items-center gap-1.5 text-black/40 dark:text-white/40">
+                                <Clock size={12} />
+                                <span className="text-[10px] font-bold uppercase tracking-wider">{readTime}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </Link>
+        </motion.article>
+    );
+}

@@ -1,0 +1,325 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  /* Hide scrollbar for all browsers */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+body::-webkit-scrollbar {
+  display: none;
+}
+
+html {
+  /* Hide scrollbar for all browsers */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+html::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.scroll-logos {
+  display: flex;
+  gap: 4rem;
+  /* spacing between logos */
+  animation: scroll-left 20s linear infinite;
+}
+
+/* Light mode default */
+.btn-cls {
+  color: black;
+  background: repeating-linear-gradient(135deg,
+      #F4C906,
+      #F4C906 10px,
+      #FFD700 10px,
+      #FFD700 20px,
+      #F9D848 20px,
+      #F9D848 30px);
+  box-shadow: 0 4px rgba(0, 0, 0, 1);
+  padding: 6px 14px;
+  border-radius: 170px;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* hover/active states */
+.btn-cls:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px rgba(0, 0, 0, 0.8);
+}
+
+/* Dark mode using class strategy */
+.dark .btn-cls {
+  box-shadow: 0 4px #ffffff;
+}
+
+.dark .btn-cls:hover {
+  box-shadow: 0 6px #ffffff;
+}
+
+
+
+.btn-cls:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px rgba(0, 0, 0, 1);
+}
+
+/* Dark variant for visibility on yellow backgrounds */
+.btn-cls-dark {
+  color: #F4C906;
+  background: repeating-linear-gradient(135deg,
+      #1a1a1a,
+      #1a1a1a 10px,
+      #2d2d2d 10px,
+      #2d2d2d 20px,
+      #242424 20px,
+      #242424 30px);
+  box-shadow: 0 4px #F4C906;
+  padding: 6px 14px;
+  border-radius: 170px;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-cls-dark:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px #F4C906;
+}
+
+.dark .btn-cls-dark {
+  box-shadow: 0 4px #ffffff;
+}
+
+.dark .btn-cls-dark:hover {
+  box-shadow: 0 6px #ffffff;
+}
+
+.btn-cls-dark:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px #F4C906;
+}
+
+.dark .btn-cls-dark:active {
+  box-shadow: 0 2px #ffffff;
+}
+
+.about-title {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+}
+
+.card-background {
+  background: linear-gradient(to bottom, rgba(14, 14, 14, 1), rgba(60, 54, 26, 1));
+}
+
+.horizontal-scroll {
+  display: flex;
+  gap: 32px;
+  /* same as your Tailwind gap-8 */
+  animation: scroll-left 20s linear infinite;
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+
+  /* adjust based on total width */
+}
+
+
+
+.about-title>.first-left-line {
+  position: absolute;
+  width: 60px;
+  height: 4px;
+  /* line thickness */
+  background: rgba(244, 201, 6, 1);
+  left: -70px;
+  top: 10%;
+  transform: translateY(-50%) rotate(15deg);
+}
+
+
+/* Left lines */
+.about-title::before {
+  content: "";
+  position: absolute;
+  left: -140px;
+  top: 45%;
+  width: 120px;
+  height: 4px;
+  background: rgba(244, 201, 6, 1);
+  transform: translateY(-50%) rotate(deg);
+}
+
+.about-title>.first-right-line {
+  position: absolute;
+  width: 60px;
+  height: 4px;
+  /* line thickness */
+  background: rgba(244, 201, 6, 1);
+  right: -70px;
+  top: 10%;
+  transform: translateY(-50%) rotate(-15deg);
+}
+
+.about-title>.third-left-line {
+  position: absolute;
+  width: 60px;
+  height: 4px;
+  /* line thickness */
+  background: rgba(244, 201, 6, 1);
+  left: -75px;
+  top: 95%;
+  transform: translateY(-50%) rotate(-15deg);
+}
+
+/* Right lines */
+.about-title::after {
+  content: "";
+  position: absolute;
+  right: -140px;
+  top: 45%;
+  width: 120px;
+  height: 4px;
+  background: #f4c906;
+  transform: translateY(-50%) rotate(deg);
+}
+
+.about-title>.third-right-line {
+  position: absolute;
+  width: 60px;
+  height: 4px;
+  /* line thickness */
+  background: rgba(244, 201, 6, 1);
+  right: -75px;
+  top: 95%;
+  transform: translateY(-50%) rotate(15deg);
+}
+
+.bg-snappy {
+  background:
+    radial-gradient(circle 600px at 300px 450px,
+      rgba(244, 201, 6, 0.25) 0%,
+      /* very soft yellow */
+      rgba(244, 201, 6, 0.15) 20%,
+      /* smoother transition */
+      rgba(0, 0, 0, 0.7) 55%,
+      /* fade into dark */
+      rgba(0, 0, 0, 0.9) 80%,
+      /* almost black */
+      #000000 100%
+      /* pure black */
+    ),
+    linear-gradient(to bottom,
+      #0D0D0D 0%,
+      #000000 50%,
+      #000000 100%);
+
+  background-color: #111111;
+  /* fallback */
+}
+
+
+@keyframes orbFloatSlow {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(20px, -30px, 0) scale(1.05);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes orbFloatFast {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(-25px, 25px, 0) scale(0.95);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+.animate-orb-slow {
+  animation: orbFloatSlow 18s ease-in-out infinite;
+}
+
+.animate-orb-fast {
+  animation: orbFloatFast 22s ease-in-out infinite;
+}
+
+@keyframes marqueeSlow {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marqueeSlow 28s linear infinite;
+}
